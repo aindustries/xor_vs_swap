@@ -1,9 +1,9 @@
 targets = swap xor
 
-$(targets) :%s:
-	clang -o $@ $<
-
 build: $(targets)
+
+$(targets): %:%.s
+	clang -o $@ $<
 
 clean:
 	rm -rf $(targets)

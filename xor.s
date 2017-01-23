@@ -1,3 +1,4 @@
+## Tested against Debian Jessie.
 	.text
 	.globl main
 
@@ -9,7 +10,7 @@
 	movl $0, %r8d
 	movl $1, %r9d
 
-	rdtscp
+	rdtscp ## writes processor time into edx:eax
 	movl %edx, %r11d # high order bits
 	movl %eax, %r12d
 
@@ -21,7 +22,7 @@ start:
 	xorl %r9d, %r8d
 	xorl %r8d, %r9d
 	#end actual work
-	#loop start ## uncomment to do with looping to sanity check. Some conflating due to the jump time
+	#loop start ## uncomment to do with looping to sanity check. Overstates time of course due to the jump time
 
 	rdtscp
 	# move original readings onto stack
@@ -32,7 +33,7 @@ start:
 	movl %edx, -12(%rbp) ## again, high order
 	movl %eax, -16(%rbp) ## low order
 
-	movq -8(%rbp), %rdx
+	movq -8(%rbp), %rdx # load back as 64bit
 	movq -16(%rbp), %rsi
 	subq %rdx, %rsi  #into rsi since we'll print it next
 
