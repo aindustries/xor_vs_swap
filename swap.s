@@ -17,9 +17,9 @@
 
 start:
 	# actual work
-	xorl %r8d, %r9d
-	xorl %r9d, %r8d
-	xorl %r8d, %r9d
+	movl %r8d, %r10d # r10 is tmp
+	movl %r9d, %r8d
+	movl %r10d, %r9d
 	#end actual work
 	#loop start ## uncomment to do with looping to sanity check. Some conflating due to the jump time
 
